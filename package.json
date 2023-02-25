@@ -1,7 +1,24 @@
 {
-  "name": "my-storybook",
-  "version": "0.1.0",
-  "private": true,
+  "name": "alexcandvlpr-my-storybook",
+  "version": "0.0.1",
+  "private": false,
+  "license": "MIT",
+  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "homepage": "https://alexcantongarcia.es",
+  "repository": {
+    "url": "https://github.com/alexcanDvlpr/reactPro-storybook",
+    "type": "git"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ]
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -15,11 +32,17 @@
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
+  "peerDependencies": {
+    "react": ">=16",
+    "typescript": ">=4.0.0"
+  },
   "scripts": {
     "start": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider build-storybook",
+    "build": "yarn clean && tsc && yarn copy-files",
     "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
-    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
+    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook",
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles -u 1 src/**/*.css dist/"
   },
   "eslintConfig": {
     "extends": [
@@ -51,7 +74,18 @@
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.3.0",
+    "copyfiles": "^2.4.1",
     "css-loader": "^6.7.3",
-    "postcss": "^8.4.21"
-  }
+    "postcss": "^8.4.21",
+    "rimraf": "^4.1.2",
+    "semantic-release": "^20.1.0"
+  },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ]
 }
